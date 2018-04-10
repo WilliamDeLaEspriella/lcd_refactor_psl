@@ -1,4 +1,6 @@
 
-require './generate_digit'
 
-generateDigits=GenerateDigit.new("4,83334535 2,8333 0,0 2,4545") 
+require './generate_digit'
+date = gets.chomp
+generate_digit= GenerateDigit.new(date)
+generate_digit.show

@@ -2,26 +2,13 @@ require './digit'
 class GenerateDigit
     def initialize(input)
         @digit = Digit.new
-        tuples =input.split(" ")
-        tuples.each do |tuple|
-            return if tuple == "0,0"
-            size = (tuple.split(",").first.to_i)+2
-            column = (tuple.split(",").first.to_i)*2 + 3
-            stringline=""
-            for i in 1..column
-                tuple.split(",").last.split("").each do |num|
-                    stringline += generateNumber(num,i,column,size)+" "
-                end   
-                stringline +="\n"
-            end
-            puts stringline
-        end
+        @tuples =input.split(" ")
     end
 
     def generateNumber(num,position,column,size)
         case num
         when "1"
-            @digit.adapter
+            @digit.adapter= :one
             @digit.createNumber(position,column,size)
         when "2"
            @digit.adapter= :two
@@ -50,6 +37,22 @@ class GenerateDigit
         when "0"
            @digit.adapter= :zero
            @digit.createNumber(position,column,size)    
+        end
+    end
+
+    def show
+        @tuples.each do |tuple|
+            return if tuple == "0,0"
+            size = (tuple.split(",").first.to_i)+2
+            column = (tuple.split(",").first.to_i)*2 + 3
+            stringline=""
+            for i in 1..column
+                tuple.split(",").last.split("").each do |num|
+                    stringline += generateNumber(num,i,column,size)+" "
+                end   
+                stringline +="\n"
+            end
+            puts stringline
         end
     end
 end
